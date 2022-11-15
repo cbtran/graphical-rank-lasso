@@ -12,7 +12,7 @@ rank_lasso_graph <- function(data, solver="gurobi", sym=FALSE, m=FALSE, verbose=
     numCores <- detectCores()
     graph.fits <- mclapply(1:p, function(i) rank_lasso_solver(x=data[,-i], y=data[,i], verbose=FALSE), mc.cores = numCores)
   } else {
-    graph.fits <- lapply(1:p, function(i) rank_lasso_solver(x=data[,-i], y=data[,i], verbose=FALSE))                                                              verbose=FALSE))
+    graph.fits <- lapply(1:p, function(i) rank_lasso_solver(x=data[,-i], y=data[,i], verbose=FALSE))                                                              
   }
   for (i in 1:p) {
     res <- graph.fits[[i]]
@@ -84,7 +84,7 @@ graph_est_and_selection <- function(graph_list, true_graph, true_omega, num_sim,
 # Graph generator. Adapted from huge package on CRAN (https://cran.r-project.org/web/packages/huge/index.html). 
 # Modified according to the graph described in our paper.
 generator <- function (d = 100, graph = "random", v = 0.3, tau=1.5, u = 0.1, 
-                       g = NULL, prob = NULL) 
+                       g = NULL, prob = NULL, verbose=FALSE)
 {
   gcinfo(FALSE)
   if (verbose) 
