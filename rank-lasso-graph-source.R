@@ -1,5 +1,5 @@
 library(qgraph)
-rank_lasso_graph <- function(data, solver="gurobi", sym=FALSE, m=FALSE, verbose=TRUE, parallel=TRUE) {
+rank_lasso_graph <- function(data, solver="gurobi", m=FALSE, verbose=TRUE, parallel=TRUE) {
   n <- dim(data)[1]
   p <- dim(data)[2]
 
@@ -8,11 +8,12 @@ rank_lasso_graph <- function(data, solver="gurobi", sym=FALSE, m=FALSE, verbose=
   if (verbose) {
     cat("Solving Rank Lasso Graph\n")
   }
+
   if (parallel) {
     numCores <- detectCores()
-    graph.fits <- mclapply(1:p, function(i) rank_lasso_solver(x=data[,-i], y=data[,i], verbose=FALSE), mc.cores = numCores)
+    graph.fits <- mclapply(1:p, function(i) rank_lasso_solver(x=data[,-i], y=data[,i], solver=solver, verbose=FALSE), mc.cores = numCores)
   } else {
-    graph.fits <- lapply(1:p, function(i) rank_lasso_solver(x=data[,-i], y=data[,i], verbose=FALSE))                                                              
+    graph.fits <- lapply(1:p, function(i) rank_lasso_solver(x=data[,-i], y=data[,i], solver=solver, verbose=FALSE))                                                              
   }
   for (i in 1:p) {
     res <- graph.fits[[i]]
@@ -86,6 +87,9 @@ graph_est_and_selection <- function(graph_list, true_graph, true_omega, num_sim,
 generator <- function (d = 100, graph = "random", v = 0.3, tau=1.5, u = 0.1, 
                        g = NULL, prob = NULL, verbose=FALSE)
 {
+  if(is.null(g)){
+    g = 1
+  }
   gcinfo(FALSE)
   if (verbose) 
     cat(graph, "graph structure....")
