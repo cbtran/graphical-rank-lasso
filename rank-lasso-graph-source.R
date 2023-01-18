@@ -1,4 +1,4 @@
-library(qgraph)
+suppressPackageStartupMessages(library(qgraph))
 rank_lasso_graph <- function(data, solver="gurobi", m=FALSE, verbose=TRUE, parallel=TRUE) {
   n <- dim(data)[1]
   p <- dim(data)[2]

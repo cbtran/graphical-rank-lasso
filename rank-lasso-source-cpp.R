@@ -1,12 +1,12 @@
-library(Rcpp)
-library(Rglpk)
-library(gurobi)
-library(lpSolve)
-library(springer)
-library(pracma)
-library(huge)
-library(ICSNP)
-sourceCpp("src/constraints_mat.cpp")
+suppressPackageStartupMessages(library(Rcpp))
+suppressPackageStartupMessages(library(Rglpk))
+suppressPackageStartupMessages(library(gurobi))
+suppressPackageStartupMessages(library(lpSolve))
+suppressPackageStartupMessages(library(springer))
+suppressPackageStartupMessages(library(pracma))
+suppressPackageStartupMessages(library(huge))
+suppressPackageStartupMessages(library(ICSNP))
+sourceCpp("src/constraints_mat.cpp", verbose=F, showOutput = F, echo=F)
 
 rank_lasso_solver <- function(x, y, alpha0=0.1, c=1.01, B=500, 
                               solver=c("gurobi", "ecos", "glpk", "lpsolve"), 

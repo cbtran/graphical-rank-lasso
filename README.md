@@ -11,6 +11,13 @@ This repo contains code to reproduce all numerical results from our paper [A Com
 
 4. `rank-lasso-graph-realdata.R`: Code to run real data example.
 
+## Simulation
+To reproduce simulation results, type in terminal console while inside ``graphical-rank-lasso`` folder
+
+```
+sh bash/reproduce.sh
+```
+
 ## Gurobi
 To speed up LP computation, we used R package for gurobi optimization. 
 

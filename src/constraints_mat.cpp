@@ -1,3 +1,5 @@
+#define EIGEN_PERMANENTLY_DISABLE_STUPID_WARNINGS
+#include <Eigen/Eigen>
 #include <RcppEigen.h> 
 #include <Rcpp.h> 
 #include <cmath> 
@@ -5,10 +7,9 @@ using namespace Rcpp;
 using namespace std;
 using namespace Eigen; 
 // [[Rcpp::depends(RcppEigen)]] 
-
 // [[Rcpp::export]]
 Rcpp::List create_constr_mat(const MatrixXd &X_diff_mat, const int num_terms){
-  const int n(X_diff_mat.rows());
+  //const int n(X_diff_mat.rows());
   const int p(X_diff_mat.cols());
   //Placeholders
   MatrixXd constr_mat(num_terms+2*p, 2*(num_terms+p));
@@ -23,7 +24,7 @@ Rcpp::List create_constr_mat(const MatrixXd &X_diff_mat, const int num_terms){
 
 // [[Rcpp::export]]
 Rcpp::List create_constr_mat_dense(const MatrixXd &X_diff_mat, const int num_terms){
-  const int n(X_diff_mat.rows());
+  //const int n(X_diff_mat.rows());
   const int p(X_diff_mat.cols());
   //Placeholders
   MatrixXd constr_mat(num_terms+2*p, 2*(num_terms+p));
