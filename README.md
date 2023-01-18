@@ -10,3 +10,10 @@ This repo contains code to reproduce all numerical results from our paper [A Com
 3. `rank-lasso-graph-reproduce.R`: Code to run simulation studies.
 
 4. `rank-lasso-graph-realdata.R`: Code to run real data example.
+
+## Gurobi
+To speed up LP computation, we used R package for gurobi optimization. 
+
+Free academic lisence is available here: https://www.gurobi.com/academia/academic-program-and-licenses/
+
+Instruction for installing gurobi in R: https://www.gurobi.com/documentation/9.5/quickstart_windows/r_ins_the_r_package.html
