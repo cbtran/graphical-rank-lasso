@@ -84,7 +84,7 @@ graph_est_and_selection <- function(graph_list, true_graph, true_omega, num_sim,
 
 # Graph generator. Adapted from huge package on CRAN (https://cran.r-project.org/web/packages/huge/index.html). 
 # Modified according to the graph described in our paper.
-generator <- function (d = 100, graph = "random", v = 0.3, tau=1.5, u = 0.1, 
+generator <- function (d, graph, v = 0.3, tau=1.5, u = 0.1, 
                        g = NULL, prob = NULL, verbose=FALSE)
 {
   if(is.null(g)){
@@ -96,7 +96,9 @@ generator <- function (d = 100, graph = "random", v = 0.3, tau=1.5, u = 0.1,
   if (graph == "cluster") {
       g = ceiling(d/20)
   }
-
+  if (graph == "band") {
+      g = 3
+  }
   if (graph == "random") {
     if (is.null(prob)) 
       prob = min(1, 3/d)

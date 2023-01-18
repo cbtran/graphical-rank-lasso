@@ -30,7 +30,12 @@ dir.create(fileFolder, recursive = TRUE)
 
 # Generate graph
 set.seed(1)
-g <- generator(d=d, graph="random", prob=0.05, tau=1.5, v=0.3)
+if (graph_type == "cluster") {
+    prob = 0.2
+} else {
+    prob = 0.05
+}
+g <- generator(d=d, graph=graph_type, prob=prob, tau=1.5)
 true_omega = g$omega
 true_sigma = g$sigma
 true_graph = g$theta
@@ -72,7 +77,7 @@ glasso.icov <- lapply(1:num_sim, function(i)
   graph_validation(validation.set, huge(data.list[[i]], method = "glasso",
                                                    nlambda=10, lambda.min.ratio=0.35)))
 
-table <- cbind(model="random", d=d, 
+table <- cbind(model=graph_type, d=d, 
                           rbind(
                             graph_est_and_selection(clime.icov, true_graph, true_omega, num_sim,
                                                     "CLIME"),
